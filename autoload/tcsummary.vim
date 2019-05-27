@@ -1,6 +1,7 @@
 
-function! tcsummary#tcProcessRange() range
-	let l:lines = getline(a:firstline,a:lastline)
+function! tcsummary#tcProcessRange(fline,lline) 
+
+	let l:lines = getline(a:fline,a:lline)
 	let l:dict = {}
 	for l:l in l:lines
 		" dict[label]time
@@ -14,7 +15,7 @@ function! tcsummary#tcProcessRange() range
 		endif
 		let l:dict[l:label] += l:m
 	endfor
-	call tcsummary#tcShow(l:dict,a:lastline )
+	call tcsummary#tcShow(l:dict,a:lline )
 endfunction
 
 function! tcsummary#timeToMin(time)
@@ -53,11 +54,11 @@ function! tcsummary#tcProcessLine(line)
 endfunction
 
 function! tcsummary#tcShow(dict,num)
-	let l:t = [ "" , "==== SUMMARY ====" ]
+	let l:t = [ "" , ".... SUMMARY ...." ]
 	for [l:k,l:v] in items(a:dict)
 		call add(l:t,printf( "%-10s\t%d(%s)", l:k,l:v, tcsummary#minToTime(l:v) ))
 	endfor
-	call add(l:t,"=================")
+	call add(l:t,".................")
 	call append(a:num,l:t)
 endfunction
 
