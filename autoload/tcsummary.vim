@@ -9,6 +9,9 @@ function! tcsummary#tcProcessRange(fline,lline)
 		if l:i <= 0
 			continue
 		endif
+		if l:l[0] == "@" or l:l[0] == "!"
+			l:l = l:l[1:]
+		endif
 		let [l:m,l:label,l:content] = tcsummary#tcProcessLine(l:l)
 		if !has_key(l:dict,l:label)
 			let l:dict[l:label] = 0
@@ -62,4 +65,8 @@ function! tcsummary#tcShow(dict,num)
 	call append(a:num,l:t)
 endfunction
 
-
+function! tcsummary#ceilingFiveMinutes(time)
+	let l:time = a:time
+	let l:time = ceil( l:time / ( 5.0 * 60 ) ) * 5 * 60
+	return float2nr( l:time )
+endfunction
