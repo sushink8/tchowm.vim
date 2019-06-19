@@ -9,8 +9,8 @@ function! tcsummary#tcProcessRange(fline,lline)
 		if l:i <= 0
 			continue
 		endif
-		if l:l[0] == "@" or l:l[0] == "!"
-			l:l = l:l[1:]
+		if l:l[0] == "@" || l:l[0] == "!"
+			let l:l = l:l[1:]
 		endif
 		let [l:m,l:label,l:content] = tcsummary#tcProcessLine(l:l)
 		if !has_key(l:dict,l:label)
