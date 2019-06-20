@@ -1,6 +1,7 @@
 
 function! tcsummary#tcProcessRange(fline,lline) 
-
+	" fline : first line
+	" lline : last line
 	let l:lines = getline(a:fline,a:lline)
 	let l:dict = {}
 	for l:l in l:lines
@@ -58,9 +59,12 @@ endfunction
 
 function! tcsummary#tcShow(dict,num)
 	let l:t = [ "" , ".... SUMMARY ...." ]
+	let l:total = 0
 	for [l:k,l:v] in items(a:dict)
+		let l:total += l:v
 		call add(l:t,printf( "%-10s\t%d(%s)", l:k,l:v, tcsummary#minToTime(l:v) ))
 	endfor
+	call add(l:t,printf("TOTAL: %d" , l:total ) )
 	call add(l:t,".................")
 	call append(a:num,l:t)
 endfunction
