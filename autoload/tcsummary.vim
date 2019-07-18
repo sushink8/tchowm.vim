@@ -64,7 +64,7 @@ function! tcsummary#tcShow(dict,num)
 		let l:total += l:v
 		call add(l:t,printf( "%-10s\t%d(%s)", l:k,l:v, tcsummary#minToTime(l:v) ))
 	endfor
-	call add(l:t,printf("TOTAL: %d" , l:total ) )
+	call add(l:t,printf("TOTAL: %d(%s)" , l:total , tcsummary#minToTime(l:total) ) )
 	call add(l:t,".................")
 	call append(a:num,l:t)
 endfunction
